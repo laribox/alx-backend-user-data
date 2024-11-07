@@ -10,6 +10,11 @@ import logging
 import os
 import mysql.connector
 
+regex = {
+    "pattern": lambda f, s: r"(?P<field>{})=[^{}]+".format("|".join(f), s),
+    "repl": lambda r: r"\g<field>={}".format(r),
+}
+
 
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:

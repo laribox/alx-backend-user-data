@@ -6,22 +6,14 @@ obfuscate sensitive information in log messages.
 
 import re
 from typing import List
-
+import logging
+import os
+import mysql.connector
 
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """
     Obfuscates specified fields in the log message.
-
-    Args:
-        fields (List[str]): The list of field names to obfuscate.
-        redaction (str): The string to replace field values with.
-        message (str): The original log message to obfuscate.
-        separator (str): The character that separates
-                          each field in the message.
-
-    Returns:
-        str: The obfuscated log message.
     """
     for field in fields:
         message = re.sub(f"{field}=[^;]*", f"{field}={redaction}", message)

@@ -3,7 +3,7 @@
 Auth module for user authentication.
 """
 import bcrypt
-import uuid
+from uuid import uuid4
 from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
@@ -22,7 +22,7 @@ class Auth:
     @staticmethod
     def _generate_uuid() -> str:
         """Generate a new UUID."""
-        return str(uuid.uuid4())
+        return str(uuid4())
 
     def register_user(self, email: str, password: str) -> User:
         """Registers a new user."""

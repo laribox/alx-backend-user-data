@@ -9,14 +9,14 @@ app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route("/", methods=["GET"])
-def index():
+@app.route("/", methods=["GET"], strict_slashes=False)
+def index() -> str:
     """Return a welcome message."""
     return jsonify({"message": "Bienvenue"})
 
 
-@app.route('/users', methods=['POST'])
-def users():
+@app.route('/users', methods=['POST'], strict_slashes=False)
+def users() -> str:
     """Register a user."""
     email = request.form.get('email')
     password = request.form.get('password')
@@ -39,8 +39,8 @@ def login() -> str:
     return response
 
 
-@app.route('/sessions', methods=['DELETE'])
-def logout():
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout() -> str:
     """Log out a user."""
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)

@@ -2,7 +2,7 @@
 """
 Basic Flask app.
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def index():
 
 
 @app.route('/users', methods=['POST'])
-def register_user():
+def users():
     """Register a user."""
     email = request.form.get('email')
     password = request.form.get('password')
